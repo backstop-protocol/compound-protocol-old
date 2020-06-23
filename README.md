@@ -1,21 +1,60 @@
 [![CircleCI](https://circleci.com/gh/compound-finance/compound-protocol.svg?style=svg&circle-token=5ed19932325c559a06f71f87d69012aedd2cf3fb)](https://circleci.com/gh/compound-finance/compound-protocol) [![codecov](https://codecov.io/gh/compound-finance/compound-protocol/branch/master/graph/badge.svg?token=q4UvsvVzOX)](https://codecov.io/gh/compound-finance/compound-protocol)
 
-Compound Protocol
-=================
+# Backstop Liquidity Protocols Commands
 
-The Compound Protocol is an Ethereum smart contract for supplying or borrowing assets. Through the cToken contracts, accounts on the blockchain *supply* capital (Ether or ERC-20 tokens) to receive cTokens or *borrow* assets from the protocol (holding other assets as collateral). The Compound cToken contracts track these balances and algorithmically set interest rates for borrowers.
+Install dependencies:
+
+    yarn
+
+Compile contracts present under `contracts` and `tests` folder:
+
+    truffle compile --contracts_directory tests
+
+Reset the contract migration
+
+    truffle migrate --reset
+
+Migration will deploy all the required contracts and generate the output like below:
+
+```
+=======================
+Compound Base Contracts
+=======================
+Comptroller: 0xAa7688E4f83F34954bE786019Faf40466dAe1BdD
+Comp: 0xEaF71bf3074381bfD0803774Bca0d4eF28262be0
+Timelock: 0xC7AACE7a02AC64be41985221CeC40c2AB40124D1
+GovernorAlpha: 0xC1DCB802AaA8bCCdbf01f767c61e3cbFf25664E5
+SimplePriceOracle: 0x510576b23e4D9B3262b74CD0cc4BF37Cc2A91769
+Unitroller: 0xbaEA9eB381766C0936DBD70C0f868FA10F1fA915
+InterestRateModel: 0xD0aaec0E79743Ab7f6A3cf9ea70d1EEe3bDc4A3e
+Maximillion: 0x1Eb1999F482A19755d686BDeAc92dA4fb0770407
+
+=============
+ERC20 Tokens
+=============
+ZRX: 0x99D8A7cbBD7Cf93d0929E7EdbC5488e1745DD50d
+
+==================
+Compound Tokens
+==================
+cETH: 0xAd0a5D61Ec394A1d842Ab9A1b21b5c72b85bA386
+cZRX: 0x24A9F6B6d5bca31e98Fc05b9718395D7D86E04EC
+```
+
+# Compound Protocol
+
+The Compound Protocol is an Ethereum smart contract for supplying or borrowing assets. Through the cToken contracts, accounts on the blockchain _supply_ capital (Ether or ERC-20 tokens) to receive cTokens or _borrow_ assets from the protocol (holding other assets as collateral). The Compound cToken contracts track these balances and algorithmically set interest rates for borrowers.
 
 Before getting started with this repo, please read:
 
-* The [Compound Whitepaper](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundWhitepaper.pdf), describing how Compound works
-* The [Compound Protocol Specification](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundProtocol.pdf), explaining in plain English how the protocol operates
+- The [Compound Whitepaper](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundWhitepaper.pdf), describing how Compound works
+- The [Compound Protocol Specification](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundProtocol.pdf), explaining in plain English how the protocol operates
 
 For questions about interacting with Compound, please visit [our Discord server](https://compound.finance/discord).
 
 For security concerns, please visit [https://compound.finance/security](https://compound.finance/security) or email [security@compound.finance](mailto:security@compound.finance).
 
-Contracts
-=========
+# Contracts
 
 We detail a few of the core contracts in the Compound protocol.
 
@@ -69,16 +108,15 @@ We detail a few of the core contracts in the Compound protocol.
   <dd>Initial interest rate model, as defined in the Whitepaper. This contract accepts a base rate and slope parameter in its constructor.</dd>
 </dl>
 
-Installation
-------------
+## Installation
+
 To run compound, pull the repository from GitHub and install its dependencies. You will need [yarn](https://yarnpkg.com/lang/en/docs/install/) or [npm](https://docs.npmjs.com/cli/install) installed.
 
     git clone https://github.com/compound-finance/compound-protocol
     cd compound-protocol
     yarn install --lock-file # or `npm install`
 
-REPL
-----
+## REPL
 
 The Compound Protocol has a simple scenario evaluation tool to test and evaluate scenarios which could occur on the blockchain. This is primarily used for constructing high-level integration tests. The tool also has a REPL to interact with local the Compound Protocol (similar to `truffle console`).
 
@@ -91,45 +129,43 @@ The Compound Protocol has a simple scenario evaluation tool to test and evaluate
 
 You can read more about the scenario runner in the [Scenario Docs](https://github.com/compound-finance/compound-protocol/tree/master/scenario/SCENARIO.md) on steps for using the repl.
 
-Testing
--------
+## Testing
+
 Jest contract tests are defined under the [tests directory](https://github.com/compound-finance/compound-protocol/tree/master/tests). To run the tests run:
 
     yarn test
 
-Integration Specs
------------------
+## Integration Specs
 
 There are additional tests under the [spec/scenario](https://github.com/compound-finance/compound-protocol/tree/master/spec/scenario) folder. These are high-level integration tests based on the scenario runner depicted above. The aim of these tests is to be highly literate and have high coverage in the interaction of contracts.
 
-Formal Verification Specs
--------------------------
+## Formal Verification Specs
 
-The Compound Protocol has a number of formal verification specifications, powered by [Certora](https://www.certora.com/). You can find details in the [spec/formal](https://github.com/compound-finance/compound-protocol/tree/master/spec/formal) folder. The Certora Verification Language (CVL) files included are specifications, which when with the Certora CLI tool, produce formal proofs (or counter-examples) that the code of a given contract exactly matches that specification.
-=======
+# The Compound Protocol has a number of formal verification specifications, powered by [Certora](https://www.certora.com/). You can find details in the [spec/formal](https://github.com/compound-finance/compound-protocol/tree/master/spec/formal) folder. The Certora Verification Language (CVL) files included are specifications, which when with the Certora CLI tool, produce formal proofs (or counter-examples) that the code of a given contract exactly matches that specification.
+
 See the [Scenario Docs](https://github.com/compound-finance/money-market/tree/master/scenario/SCENARIO.md) on steps for using the repl.
 
-Testing
--------
+## Testing
+
 Contract tests are defined under the [tests directory](https://github.com/compound-finance/money-market/tree/master/tests). To run the tests run:
 
     yarn test
->>>>>>> Compound Token and Governance (#519)
 
-Code Coverage
--------------
+> > > > > > > Compound Token and Governance (#519)
+
+## Code Coverage
+
 To run code coverage, run:
 
     yarn coverage
 
-Linting
--------
+## Linting
+
 To lint the code, run:
 
     yarn lint
 
-Docker
-------
+## Docker
 
 To run in docker:
 
@@ -159,8 +195,7 @@ From within a docker shell, you can interact locally with the protocol via ganac
     '10000000000000000000000000'
 ```
 
-Console
--------
+## Console
 
 After you deploy, as above, you can run a truffle console with the following command:
 
@@ -184,8 +219,7 @@ This command will start a saddle console conencted to Goerli testnet (see [Saddl
     '10000000000000000000000000'
 ```
 
-Deploying a CToken from Source
-------------------------------
+## Deploying a CToken from Source
 
 Note: you will need to set `~/.ethereum/<network>` with your private key or assign your private key to the environment variable `ACCOUNT`.
 
@@ -237,7 +271,8 @@ npx saddle -n rinkeby script token:match 0x19B674715cD20626415C738400FDd0d32D680
 ```
 
 ## Deploying a CToken from Docker Build
----------------------------------------
+
+---
 
 To deploy a specific version of the Compound Protocol, you can use the `token:deploy` script through Docker:
 
@@ -269,8 +304,7 @@ docker run --env ACCOUNT=0x$(cat ~/.ethereum/rinkeby) compoundfinance/compound-p
 }'
 ```
 
-Discussion
-----------
+## Discussion
 
 For any concerns with the protocol, open an issue or visit us on [Discord](https://compound.finance/discord) to discuss.
 
