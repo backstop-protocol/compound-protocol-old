@@ -25,6 +25,7 @@ module.exports = async function (deployer, network, accounts) {
 
   const admin = accounts[0];
   const guardian = accounts[1];
+  const borrower = accounts[2];
 
   // Deploy Comptroller
   await deployer.deploy(Comptroller);
@@ -103,6 +104,11 @@ module.exports = async function (deployer, network, accounts) {
 
   //await deployer.deploy(PriceOracleProxy);
 
+  console.log("Configuring Compound Contracts...");
+  await comptroller._setMaxAssets(3);
+  const maxAssets = await comptroller.maxAssets();
+  assert(new BN(3).eq(maxAssets));
+
   console.log("\nAdding cTokens to Market...");
   // Adding cETH to Market
   await comptroller._supportMarket(cETH.address);
@@ -117,19 +123,48 @@ module.exports = async function (deployer, network, accounts) {
   assert(isListed, "ERROR: cZRX not listed");
 
   console.log("\nValidating setup...");
+  const ONE_ETH = new BN(10).pow(new BN(18));
+  const TEN_ETH = new BN(10).mul(ONE_ETH);
+
+  // ADMIN supplying liquidity
+  // ===========================
   // Minting cETH with ETH
-  await cETH.mint({ value: web3.utils.toWei("1", "ether") });
+  await cETH.mint({ value: TEN_ETH });
   let ethBalOfcETHContract = await web3.eth.getBalance(cETH.address);
-  assert(UNIT.eq(new BN(ethBalOfcETHContract)));
+  assert(TEN_ETH.eq(new BN(ethBalOfcETHContract)));
   let cETHBalOfUser = await cETH.balanceOf(admin);
-  assert(UNIT.eq(cETHBalOfUser));
+  assert(TEN_ETH.eq(cETHBalOfUser));
+
+  // User enables ETH as collateral
+  await comptroller.enterMarkets([cETH.address]);
+  let isMember = await comptroller.checkMembership(admin, cETH.address);
+  assert(isMember);
+
+  // Minting cZRX with ZRX
+  const THOUSAND_ZRX = new BN(1000).mul(UNIT);
+  await ZRX.approve(cZRX.address, THOUSAND_ZRX);
+  await cZRX.mint(THOUSAND_ZRX);
+  let zrxBalOfcZRXContract = await ZRX.balanceOf(cZRX.address);
+  assert(THOUSAND_ZRX.eq(new BN(zrxBalOfcZRXContract)));
+  let cZRXBalOfUser = await cZRX.balanceOf(admin);
+  assert(THOUSAND_ZRX.eq(cZRXBalOfUser));
+
+  // User exits from ETH as collateral
+  //   await comptroller.exitMarket(cETH.address);
+  //   isMember = await comptroller.checkMembership(admin, cETH.address);
+  //   assert(!isMember);
 
   // Redeem ETH with cETH
-  await cETH.redeem(cETHBalOfUser);
-  ethBalOfcETHContract = await web3.eth.getBalance(cETH.address);
-  assert(ZERO.eq(new BN(ethBalOfcETHContract)));
-  cETHBalOfUser = await cETH.balanceOf(admin);
-  assert(ZERO.eq(cETHBalOfUser));
+  //   await cETH.redeem(cETHBalOfUser);
+  //   ethBalOfcETHContract = await web3.eth.getBalance(cETH.address);
+  //   assert(ZERO.eq(new BN(ethBalOfcETHContract)));
+  //   cETHBalOfUser = await cETH.balanceOf(admin);
+  //   assert(ZERO.eq(cETHBalOfUser));
+
+  // BORROWER
+  // =========
+
+  // TODO borrow ZRX
 
   console.log("Validation OK\n");
   console.log("=======================");
