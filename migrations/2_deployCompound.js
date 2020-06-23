@@ -10,7 +10,8 @@ const WhitePaperInterestRateModel = artifacts.require(
   "WhitePaperInterestRateModel"
 );
 const CEther = artifacts.require("CEther");
-//const StandardToken = artifacts.require("tests/contracts/StandardToken");
+const StandardToken = artifacts.require("StandardToken");
+const CErc20 = artifacts.require("CErc20");
 
 const BN = web3.utils.BN;
 
@@ -75,7 +76,6 @@ module.exports = async function (deployer, network, accounts) {
   const maximillion = await deployer.deploy(Maximillion, cETH.address);
 
   // Deploying ERC20 tokens
-  /*
   const INIT_SUPPLY = new BN(1000000);
   const name = "0x";
   const symbol = "ZRX";
@@ -89,7 +89,17 @@ module.exports = async function (deployer, network, accounts) {
     decimals,
     symbol
   );
-  */
+
+  // Deploy cZRX
+  const cZRX = await CErc20.new(
+    ZRX.address,
+    comptroller.address,
+    interestRateModel.address,
+    initialExchangeRateMantissa,
+    "Compound 0x",
+    "cZRX",
+    18
+  );
 
   //await deployer.deploy(PriceOracleProxy);
 
@@ -104,13 +114,15 @@ module.exports = async function (deployer, network, accounts) {
   console.log("Unitroller: " + unitroller.address);
   console.log("InterestRateModel: " + interestRateModel.address);
   console.log("Maximillion: " + maximillion.address);
-
+  console.log("");
+  console.log("=============");
+  console.log("ERC20 Tokens");
+  console.log("=============");
+  console.log("ZRX: " + ZRX.address);
+  console.log("");
   console.log("==================");
   console.log("Compound Tokens");
   console.log("==================");
   console.log("cETH: " + cETH.address);
-
-  console.log("=============");
-  console.log("ERC20 Tokens");
-  console.log("=============");
+  console.log("cZRX: " + cZRX.address);
 };
