@@ -23,7 +23,7 @@ Support cBAT collateralFactor:0.5
 ComptrollerImpl Deploy Scenario ComptrollerScen
 Unitroller SetPendingImpl ComptrollerScen
 
-Prep Geoff 100e18 ZRX cZRX
+Prep Geoff 10000e18 ZRX cZRX
 Mint Geoff 50e18 cZRX--tokenbalance = 50e18 / 2e9 = 2.5e10
 
 Prep Fourth Some BAT cBAT
