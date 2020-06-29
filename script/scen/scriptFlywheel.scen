@@ -2,14 +2,12 @@
 -- Deploys basic ComptrollerG3
 
 Unitroller Deploy
-PriceOracle Deploy Fixed 1.0
-PriceOracleProxy Deploy Admin (PriceOracle Address) (Address Zero) (Address Zero) (Address Zero) (Address Zero) (Address Zero)
 ----g2
 ComptrollerImpl Deploy ScenarioG2 ComptrollerScenG2
 Unitroller SetPendingImpl ComptrollerScenG2
 ComptrollerImpl ComptrollerScenG2 BecomeG2
 --list some tokens
-Comptroller SetPriceOracle (PriceOracleProxy Address)
+
 Comptroller SetMaxAssets 20
 Comptroller SetCloseFactor 0.5
 Comptroller LiquidationIncentive 1.1
@@ -17,14 +15,24 @@ NewEtherToken cETH
 NewCToken ZRX cZRX
 NewCToken BAT cBAT
 Comptroller SupportMarket cETH
+PriceOracle Deploy Fixed 1.0
+PriceOracleProxy Deploy Admin (PriceOracle Address) (Address cETH) (Address Zero) (Address Zero) (Address Zero) (Address Zero)
+Comptroller SetPriceOracle (PriceOracleProxy Address)
+
 Support cZRX collateralFactor:0.5
 Support cBAT collateralFactor:0.5
+
+
 -- final
 ComptrollerImpl Deploy Scenario ComptrollerScen
 Unitroller SetPendingImpl ComptrollerScen
 
 Prep Geoff 10000e18 ZRX cZRX
 Mint Geoff 50e18 cZRX--tokenbalance = 50e18 / 2e9 = 2.5e10
+
+-- bprotocol
+Prep First 10000e18 ZRX cZRX
+-- bprotocol
 
 Prep Fourth Some BAT cBAT
 Mint Fourth 6e18 cBAT
