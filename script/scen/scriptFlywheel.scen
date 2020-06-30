@@ -12,6 +12,9 @@ Comptroller SetMaxAssets 20
 Comptroller SetCloseFactor 0.5
 Comptroller LiquidationIncentive 1.1
 NewEtherToken cETH
+
+
+
 NewCToken ZRX cZRX
 NewCToken BAT cBAT
 Comptroller SupportMarket cETH
@@ -22,6 +25,10 @@ Comptroller SetPriceOracle (PriceOracleProxy Address)
 Support cZRX collateralFactor:0.5
 Support cBAT collateralFactor:0.5
 
+Comptroller SetCollateralFactor cETH 0.75
+
+CToken cZRX SetReserveFactor 0.1
+CToken cETH SetReserveFactor 0.5
 
 -- final
 ComptrollerImpl Deploy Scenario ComptrollerScen
@@ -29,6 +36,7 @@ Unitroller SetPendingImpl ComptrollerScen
 
 Prep Geoff 10000e18 ZRX cZRX
 Mint Geoff 50e18 cZRX--tokenbalance = 50e18 / 2e9 = 2.5e10
+
 
 -- bprotocol
 Prep First 10000e18 ZRX cZRX
@@ -60,6 +68,8 @@ Give (Address Comptroller) 5000000e18 COMP
 Comptroller Send "setCompAddress(address)" (Address COMP)
 
 Comptroller RefreshCompSpeeds
+
+
 
 FastForward 300000 Blocks
 Read (Comptroller Address)
