@@ -29,6 +29,7 @@ export async function createInterface(options): Promise<readline.ReadLine> {
 		return line;
 	}
 
+	rlAny.history = rlAny.history || [];
 	rlAny.history.push.apply(rlAny.history, cleanHistory);
 
 	return rl;

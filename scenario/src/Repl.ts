@@ -173,10 +173,11 @@ async function repl(): Promise<void> {
       return [...acc, ...finalScript.split("\n")];
     }, <string[]>[]);
 
-    return await combined.reduce(async (acc, command) => {
+    await combined.reduce(async (acc, command) => {
       return await runCommand(await acc, command, macros);
     }, Promise.resolve(world));
     printer.printLine(`Script complete.`);
+    process.exit(0);
   } else {
     await loop(world, rl, macros);
   }
