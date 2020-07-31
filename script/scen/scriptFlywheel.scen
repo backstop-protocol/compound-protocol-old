@@ -19,6 +19,7 @@ PriceOracle Deploy Fixed 1.0
 PriceOracleProxy Deploy Admin (PriceOracle Address) (Address cETH) (Address Zero) (Address Zero) (Address Zero) (Address Zero)
 Comptroller SetPriceOracle (PriceOracleProxy Address)
 
+SetCollateralFactor cETH 0.5
 Support cZRX collateralFactor:0.5
 Support cBAT collateralFactor:0.5
 
