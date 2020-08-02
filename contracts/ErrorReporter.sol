@@ -2,24 +2,24 @@ pragma solidity ^0.5.16;
 
 contract ComptrollerErrorReporter {
     enum Error {
-        NO_ERROR,
-        UNAUTHORIZED,
-        COMPTROLLER_MISMATCH,
-        INSUFFICIENT_SHORTFALL,
-        INSUFFICIENT_LIQUIDITY,
-        INVALID_CLOSE_FACTOR,
-        INVALID_COLLATERAL_FACTOR,
-        INVALID_LIQUIDATION_INCENTIVE,
-        MARKET_NOT_ENTERED, // no longer possible
-        MARKET_NOT_LISTED,
-        MARKET_ALREADY_LISTED,
-        MATH_ERROR,
-        NONZERO_BORROW_BALANCE,
-        PRICE_ERROR,
-        REJECTION,
-        SNAPSHOT_ERROR,
-        TOO_MANY_ASSETS,
-        TOO_MUCH_REPAY
+        NO_ERROR,                           // 0
+        UNAUTHORIZED,                       // 1
+        COMPTROLLER_MISMATCH,               // 2
+        INSUFFICIENT_SHORTFALL,             // 3
+        INSUFFICIENT_LIQUIDITY,             // 4
+        INVALID_CLOSE_FACTOR,               // 5
+        INVALID_COLLATERAL_FACTOR,          // 6
+        INVALID_LIQUIDATION_INCENTIVE,      // 7
+        MARKET_NOT_ENTERED, // no longer possible // 8
+        MARKET_NOT_LISTED,                  // 9
+        MARKET_ALREADY_LISTED,              // 10
+        MATH_ERROR,                         // 11
+        NONZERO_BORROW_BALANCE,             // 12
+        PRICE_ERROR,                        // 13
+        REJECTION,                          // 14
+        SNAPSHOT_ERROR,                     // 15
+        TOO_MANY_ASSETS,                    // 16
+        TOO_MUCH_REPAY                      // 17
     }
 
     enum FailureInfo {

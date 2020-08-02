@@ -29,10 +29,11 @@ ComptrollerImpl Deploy Scenario ComptrollerScen
 Unitroller SetPendingImpl ComptrollerScen
 
 Prep Geoff 10000e18 ZRX cZRX
-Mint Geoff 50e18 cZRX--tokenbalance = 50e18 / 2e9 = 2.5e10
+Mint Geoff 50e18 cZRX --tokenbalance = 50e18 / 2e9 = 2.5e10
 
 -- bprotocol
 Prep First 10000e18 ZRX cZRX
+Prep Pool 1000e18 ZRX cZRX 
 -- bprotocol
 
 Prep Fourth Some BAT cBAT
