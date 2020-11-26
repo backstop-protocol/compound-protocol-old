@@ -26,7 +26,10 @@ export const accountMap = {
     jared: 6,
     seventh: 6,
 
-    pool: 9,
+    member1: 6,
+    member2: 7,
+    member3: 8,
+    member4: 9,
 };
 
 export interface Account {

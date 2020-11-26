@@ -33,7 +33,10 @@ Mint Geoff 50e18 cZRX --tokenbalance = 50e18 / 2e9 = 2.5e10
 
 -- bprotocol
 Prep First 10000e18 ZRX cZRX
-Prep Pool 1000e18 ZRX cZRX 
+Prep Member1 1000e18 ZRX cZRX 
+Prep Member2 1000e18 ZRX cZRX 
+Prep Member3 1000e18 ZRX cZRX 
+Prep Member4 1000e18 ZRX cZRX 
 -- bprotocol
 
 Prep Fourth Some BAT cBAT
