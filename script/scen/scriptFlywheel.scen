@@ -28,36 +28,43 @@ Support cBAT collateralFactor:0.5
 ComptrollerImpl Deploy Scenario ComptrollerScen
 Unitroller SetPendingImpl ComptrollerScen
 
-Prep Geoff 10000e18 ZRX cZRX
-Mint Geoff 50e18 cZRX --tokenbalance = 50e18 / 2e9 = 2.5e10
+-- Prep Geoff 10000e18 ZRX cZRX
+-- Mint Geoff 50e18 cZRX --tokenbalance = 50e18 / 2e9 = 2.5e10
 
 -- bprotocol
 Prep First 10000e18 ZRX cZRX
+Prep First 10000e18 BAT cBAT
+
 Prep Member1 1000e18 ZRX cZRX 
 Prep Member2 1000e18 ZRX cZRX 
 Prep Member3 1000e18 ZRX cZRX 
 Prep Member4 1000e18 ZRX cZRX 
+
+Prep Member1 1000e18 BAT cBAT 
+Prep Member2 1000e18 BAT cBAT 
+Prep Member3 1000e18 BAT cBAT 
+Prep Member4 1000e18 BAT cBAT 
 -- bprotocol
 
-Prep Fourth Some BAT cBAT
-Mint Fourth 6e18 cBAT
-EnterMarkets Fourth cBAT
-Borrow Fourth 1e18 cZRX
+-- Prep Fourth Some BAT cBAT
+-- Mint Fourth 6e18 cBAT
+-- EnterMarkets Fourth cBAT
+-- Borrow Fourth 1e18 cZRX
 
-Prep Fifth Some BAT cBAT
-Mint Fifth 6e18 cBAT
-EnterMarkets Fifth cBAT
-Borrow Fifth 1e18 cZRX
+-- Prep Fifth Some BAT cBAT
+-- Mint Fifth 6e18 cBAT
+-- EnterMarkets Fifth cBAT
+-- Borrow Fifth 1e18 cZRX
 
-Prep Sixth Some BAT cBAT
-Mint Sixth 6e18 cBAT
-EnterMarkets Sixth cBAT
-Borrow Sixth 1e18 cZRX
+-- Prep Sixth Some BAT cBAT
+-- Mint Sixth 6e18 cBAT
+-- EnterMarkets Sixth cBAT
+-- Borrow Sixth 1e18 cZRX
 
-Prep Seventh Some BAT cBAT
-Mint Seventh 6e18 cBAT
-EnterMarkets Seventh cBAT
-Borrow Seventh 1e18 cZRX
+-- Prep Seventh Some BAT cBAT
+-- Mint Seventh 6e18 cBAT
+-- EnterMarkets Seventh cBAT
+-- Borrow Seventh 1e18 cZRX
 
 ComptrollerImpl ComptrollerScen Become 1e18 [cZRX cBAT]
 Erc20 Deploy Standard COMP "COMP Token" 18
