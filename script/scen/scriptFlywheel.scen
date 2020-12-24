@@ -8,21 +8,32 @@ Unitroller SetPendingImpl ComptrollerScenG2
 ComptrollerImpl ComptrollerScenG2 BecomeG2
 --list some tokens
 
+-- Non Standard USDT token, transfer, transferFrom and approve not return bool
+Erc20 Deploy NonStandard USDT USDT 6 
+
 Comptroller SetMaxAssets 20
 Comptroller SetCloseFactor 0.5
 Comptroller LiquidationIncentive 1.1
 NewEtherToken cETH
 NewCToken ZRX cZRX
 NewCToken BAT cBAT
+NewCTokenBringERC20 USDT cUSDT initialExchangeRate:2e-3
+
 Comptroller SupportMarket cETH
-PriceOracle Deploy Fixed 1.0
-PriceOracleProxy Deploy Admin (PriceOracle Address) (Address cETH) (Address Zero) (Address Zero) (Address Zero) (Address Zero)
-Comptroller SetPriceOracle (PriceOracleProxy Address)
+
+PriceOracle Deploy Simple
+
+PriceOracle SetPrice cZRX 1.0
+PriceOracle SetPrice cBAT 1.0
+PriceOracle SetPrice cUSDT 1.0
+
+Comptroller SetPriceOracle (Address PriceOracle)
 
 SetCollateralFactor cETH 0.5
 Support cZRX collateralFactor:0.5
 Support cBAT collateralFactor:0.5
-
+-- cUSDT collateralFactor set to 0
+Comptroller SupportMarket cUSDT 
 
 -- final
 ComptrollerImpl Deploy Scenario ComptrollerScen
@@ -34,6 +45,7 @@ Unitroller SetPendingImpl ComptrollerScen
 -- bprotocol
 Prep First 10000e18 ZRX cZRX
 Prep First 10000e18 BAT cBAT
+Prep First 10000e6 USDT cUSDT
 
 Prep Member1 1000e18 ZRX cZRX 
 Prep Member2 1000e18 ZRX cZRX 
@@ -44,6 +56,11 @@ Prep Member1 1000e18 BAT cBAT
 Prep Member2 1000e18 BAT cBAT 
 Prep Member3 1000e18 BAT cBAT 
 Prep Member4 1000e18 BAT cBAT 
+
+Prep Member1 1000e6 USDT cUSDT
+Prep Member2 1000e6 USDT cUSDT
+Prep Member3 1000e6 USDT cUSDT
+Prep Member4 1000e6 USDT cUSDT
 -- bprotocol
 
 -- Prep Fourth Some BAT cBAT
@@ -66,7 +83,7 @@ Prep Member4 1000e18 BAT cBAT
 -- EnterMarkets Seventh cBAT
 -- Borrow Seventh 1e18 cZRX
 
-ComptrollerImpl ComptrollerScen Become 1e18 [cZRX cBAT]
+ComptrollerImpl ComptrollerScen Become 1e18 [cZRX cBAT cUSDT]
 Erc20 Deploy Standard COMP "COMP Token" 18
 Give (Address Comptroller) 5000000e18 COMP
 Comptroller Send "setCompAddress(address)" (Address COMP)
@@ -74,8 +91,11 @@ Comptroller Send "setCompAddress(address)" (Address COMP)
 Comptroller RefreshCompSpeeds
 
 FastForward 300000 Blocks
-Read (Comptroller Address)
-Read (Address Fourth)
-Read (Address Fifth)
-Read (Address Sixth)
-Read (Address Seventh)
+-- Read (Comptroller Address)
+-- Read (Address Fourth)
+-- Read (Address Fifth)
+-- Read (Address Sixth)
+-- Read (Address Seventh)
+
+Read (Address PriceOracle)
+Read (Address Comptroller)
