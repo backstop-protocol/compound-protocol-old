@@ -84,9 +84,15 @@ Prep Member4 1000e6 USDT cUSDT
 -- Borrow Seventh 1e18 cZRX
 
 ComptrollerImpl ComptrollerScen Become 1e18 [cZRX cBAT cUSDT]
-Erc20 Deploy Standard COMP "COMP Token" 18
-Give (Address Comptroller) 5000000e18 COMP
+
+-- COMP TOKEN SETUP
+Comp Deploy Admin
+Assert Equal (Comp Symbol) "COMP"
+From Admin (Comp Transfer Comptroller 5000000e18)
 Comptroller Send "setCompAddress(address)" (Address COMP)
+
+-- JUST FOR TEST
+-- From Admin (Comp Delegate Geoff)
 
 Comptroller RefreshCompSpeeds
 
