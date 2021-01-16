@@ -47,20 +47,20 @@ Prep First 10000e18 ZRX cZRX
 Prep First 10000e18 BAT cBAT
 Prep First 10000e6 USDT cUSDT
 
-Prep Member1 1000e18 ZRX cZRX 
-Prep Member2 1000e18 ZRX cZRX 
-Prep Member3 1000e18 ZRX cZRX 
-Prep Member4 1000e18 ZRX cZRX 
+Prep Member1 10000e18 ZRX cZRX 
+Prep Member2 10000e18 ZRX cZRX 
+Prep Member3 10000e18 ZRX cZRX 
+Prep Member4 10000e18 ZRX cZRX 
 
-Prep Member1 1000e18 BAT cBAT 
-Prep Member2 1000e18 BAT cBAT 
-Prep Member3 1000e18 BAT cBAT 
-Prep Member4 1000e18 BAT cBAT 
+Prep Member1 10000e18 BAT cBAT 
+Prep Member2 10000e18 BAT cBAT 
+Prep Member3 10000e18 BAT cBAT 
+Prep Member4 10000e18 BAT cBAT 
 
-Prep Member1 1000e6 USDT cUSDT
-Prep Member2 1000e6 USDT cUSDT
-Prep Member3 1000e6 USDT cUSDT
-Prep Member4 1000e6 USDT cUSDT
+Prep Member1 10000e6 USDT cUSDT
+Prep Member2 10000e6 USDT cUSDT
+Prep Member3 10000e6 USDT cUSDT
+Prep Member4 10000e6 USDT cUSDT
 -- bprotocol
 
 -- Prep Fourth Some BAT cBAT
