@@ -11,6 +11,9 @@ ComptrollerImpl ComptrollerScenG2 BecomeG2
 -- Non Standard USDT token, transfer, transferFrom and approve not return bool
 Erc20 Deploy NonStandard USDT USDT 6 
 
+-- WBTC with 8 decimal
+Erc20 Deploy Standard WBTC WBTC 8 
+
 Comptroller SetMaxAssets 20
 Comptroller SetCloseFactor 0.5
 Comptroller LiquidationIncentive 1.1
@@ -18,6 +21,7 @@ NewEtherToken cETH
 NewCToken ZRX cZRX
 NewCToken BAT cBAT
 NewCTokenBringERC20 USDT cUSDT initialExchangeRate:2e-3
+NewCTokenBringERC20 WBTC cWBTC initialExchangeRate:2e16
 
 Comptroller SupportMarket cETH
 
@@ -26,12 +30,14 @@ PriceOracle Deploy Simple
 PriceOracle SetPrice cZRX 1.0
 PriceOracle SetPrice cBAT 1.0
 PriceOracle SetPrice cUSDT 1.0
+PriceOracle SetPrice cWBTC 10000.0
 
 Comptroller SetPriceOracle (Address PriceOracle)
 
 SetCollateralFactor cETH 0.5
 Support cZRX collateralFactor:0.5
 Support cBAT collateralFactor:0.5
+Support cWBTC collateralFactor:0.5
 -- cUSDT collateralFactor set to 0
 Comptroller SupportMarket cUSDT 
 
@@ -46,6 +52,7 @@ Unitroller SetPendingImpl ComptrollerScen
 Prep First 10000e18 ZRX cZRX
 Prep First 10000e18 BAT cBAT
 Prep First 10000e6 USDT cUSDT
+Prep First 10000e8 WBTC cWBTC
 
 Prep Member1 10000e18 ZRX cZRX 
 Prep Member2 10000e18 ZRX cZRX 
@@ -61,6 +68,11 @@ Prep Member1 10000e6 USDT cUSDT
 Prep Member2 10000e6 USDT cUSDT
 Prep Member3 10000e6 USDT cUSDT
 Prep Member4 10000e6 USDT cUSDT
+
+Prep Member1 10000e8 WBTC cWBTC
+Prep Member2 10000e8 WBTC cWBTC
+Prep Member3 10000e8 WBTC cWBTC
+Prep Member4 10000e8 WBTC cWBTC
 -- bprotocol
 
 -- Prep Fourth Some BAT cBAT
@@ -83,13 +95,15 @@ Prep Member4 10000e6 USDT cUSDT
 -- EnterMarkets Seventh cBAT
 -- Borrow Seventh 1e18 cZRX
 
-ComptrollerImpl ComptrollerScen Become 1e18 [cZRX cBAT cUSDT]
+ComptrollerImpl ComptrollerScen Become 1e18 [cETH cZRX cBAT cUSDT cWBTC]
 
 -- COMP TOKEN SETUP
 Comp Deploy Admin
 Assert Equal (Comp Symbol) "COMP"
 From Admin (Comp Transfer Comptroller 5000000e18)
 Comptroller Send "setCompAddress(address)" (Address COMP)
+
+-- Comptroller AddCompMarkets cETH
 
 -- JUST FOR TEST
 -- From Admin (Comp Delegate Geoff)
