@@ -7,12 +7,17 @@ The Compound Protocol is an Ethereum smart contract for supplying or borrowing a
 
 Before getting started with this repo, please read:
 
-* The [Compound Whitepaper](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundWhitepaper.pdf), describing how Compound works
+* The [Compound Whitepaper](https://compound.finance/documents/Compound.Whitepaper.pdf), describing how Compound works
 * The [Compound Protocol Specification](https://github.com/compound-finance/compound-protocol/tree/master/docs/CompoundProtocol.pdf), explaining in plain English how the protocol operates
 
 For questions about interacting with Compound, please visit [our Discord server](https://compound.finance/discord).
 
 For security concerns, please visit [https://compound.finance/security](https://compound.finance/security) or email [security@compound.finance](mailto:security@compound.finance).
+
+Contributing
+============
+
+Contributing to the Compound protocol is a bit different than most open-source projects -- check out the [community guide on Contributing](https://www.comp.xyz/t/contributing-to-compound-protocol/48).
 
 Contracts
 =========
@@ -36,7 +41,7 @@ We detail a few of the core contracts in the Compound protocol.
 
 <dl>
   <dt>Governor Alpha</dt>
-  <dd>The administrator of the Compound timelock contract. Holders of Comp token may create and vote on proposals which will be queued into the Compound timelock and then have effects on Compound cToken and Copmtroller contracts. This contract may be replaced in the future with a beta version.</dd>
+  <dd>The administrator of the Compound timelock contract. Holders of Comp token may create and vote on proposals which will be queued into the Compound timelock and then have effects on Compound cToken and Comptroller contracts. This contract may be replaced in the future with a beta version.</dd>
 </dl>
 
 <dl>
@@ -106,15 +111,6 @@ Formal Verification Specs
 -------------------------
 
 The Compound Protocol has a number of formal verification specifications, powered by [Certora](https://www.certora.com/). You can find details in the [spec/formal](https://github.com/compound-finance/compound-protocol/tree/master/spec/formal) folder. The Certora Verification Language (CVL) files included are specifications, which when with the Certora CLI tool, produce formal proofs (or counter-examples) that the code of a given contract exactly matches that specification.
-=======
-See the [Scenario Docs](https://github.com/compound-finance/money-market/tree/master/scenario/SCENARIO.md) on steps for using the repl.
-
-Testing
--------
-Contract tests are defined under the [tests directory](https://github.com/compound-finance/money-market/tree/master/tests). To run the tests run:
-
-    yarn test
->>>>>>> Compound Token and Governance (#519)
 
 Code Coverage
 -------------
