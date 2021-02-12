@@ -21,7 +21,7 @@ NewEtherToken cETH
 NewCToken ZRX cZRX
 NewCToken BAT cBAT
 NewCTokenBringERC20 USDT cUSDT initialExchangeRate:2e-3
-NewCTokenBringERC20 WBTC cWBTC initialExchangeRate:2e16
+NewCToken WBTC cWBTC initialExchangeRate:1e5
 
 Comptroller SupportMarket cETH
 
