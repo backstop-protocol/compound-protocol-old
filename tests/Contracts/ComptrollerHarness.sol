@@ -166,6 +166,10 @@ contract ComptrollerScenario is Comptroller {
     function unlist(CToken cToken) public {
         markets[address(cToken)].isListed = false;
     }
+
+    function setCompSpeed(address cToken, uint compSpeed) public {
+        compSpeeds[cToken] = compSpeed;
+    }
 }
 
 
